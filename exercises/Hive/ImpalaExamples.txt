@@ -1,0 +1,28 @@
+create table heroes (name string, era string, planet string);
+create table villains (name string, era string, planet string);
+
+insert into heroes values
+                   ('Amitabh','80s','Earth'),
+                   ('Dev Anand','Old','Earth'),
+                   ('Amir khan','Latest','Mars');
+
+insert into villains values
+                  ('Prem Chopra','Old','Earth'),
+                  ('Gabbar Singh','80s','Earth'),
+                  ('Paresh Rawal','Latest','Venus');
+
+select concat(heroes.name,' vs. ',villains.name) as battle
+                  from heroes join villains
+                  where heroes.era = villains.era and heroes.planet = villains.planet;
+
+
+select concat(heroes.name,' vs. ',villains.name) as battle from heroes cross join villains;
+
+
+
+create table x_axis (x int);
+create table y_axis (y int);
+insert into x_axis values (1),(2),(3),(4);
+insert into y_axis values (2010),(2011),(2012),(2013),(2014);
+select y as year, x as quarter from x_axis cross join y_axis;
+select y as year, x as quarter from x_axis cross join y_axis where x in (1,3);

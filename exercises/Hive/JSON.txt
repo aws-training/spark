@@ -1,0 +1,20 @@
+JSON Example
+------------------
+
+
+Step 1: CREATE external TABLE employees (
+  name         STRING,
+  salary       int,
+  subordinates ARRAY<STRING>,
+  deductions   MAP<STRING, int>,
+  address      STRUCT<street:STRING, city:STRING, state:STRING, zip:INT>)
+ROW FORMAT SERDE 'org.openx.data.jsonserde.JsonSerDe'
+       LOCATION '/user/bigdata/myserde'
+
+Step 2:	load data local inpath '/home/bigdata/training_materials/developer/exercises/Hive/emp.json' into table employees;
+
+Step 3:	select * from employees;
+select subordinates[0] from employees;
+	   
+	   
+

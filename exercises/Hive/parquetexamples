@@ -1,0 +1,21 @@
+create table temps_txt (statecode string, countrycode string, sitenum string, paramcode string, poc string, latitude string, longitude string, datum string, param string, datelocal string, timelocal string, dategmt string, timegmt string, degrees double, uom string, mdl string, uncert string, qual string, method string, methodname string, state string, county string, dateoflastchange string) row format delimited fields terminated by ',';
+
+load data local inpath '/home/bigdata/training_materials/developer/data/weatherdata/hourly_TEMP_1990.csv' into table temps_txt;
+
+
+
+_______________________________________________________________________________
+create table temps_par (statecode string, countrycode string, sitenum string, paramcode string, poc string, latitude string, longitude string, datum string, param string, datelocal string, timelocal string, dategmt string, timegmt string, degrees double, uom string, mdl string, uncert string, qual string, method string, methodname string, state string, county string, dateoflastchange string)
+  STORED AS PARQUET;
+_______________________________________________________________________________
+
+
+insert overwrite table temps_par select * from temp_txt;
+
+select avg(degrees) from temps_txt;
+select avg(degrees) from temps_par;
+
+
+
+
+

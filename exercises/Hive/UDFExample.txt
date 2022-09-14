@@ -1,0 +1,11 @@
+Hive UDF Example
+-------------------
+STEP 1:
+javac -classpath /usr/lib/hive/lib/hive-exec-1.1.0-cdh5.16.1.jar:/usr/lib/hadoop/hadoop-common-2.6.0-cdh5.16.1.jar:/usr/lib/hadoop/client/hadoop-mapreduce-client-core-2.6.0-cdh5.16.1.jar SimpleUDFExample.java
+STEP 2:
+jar cvf helloudf.jar SimpleUDFExample.class
+STEP 3:
+hive> add jar helloudf.jar;
+hive>create  function helloudf as 'SimpleUDFExample';
+
+hive>select testudf(name) from movie limit 10;

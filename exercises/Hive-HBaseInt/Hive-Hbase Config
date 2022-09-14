@@ -1,0 +1,27 @@
+Local Hive table 
+create table employeesInHive(rowkey String, firstName STRING, lastName STRING,DOB string,salary double,address1 string,address2 string,city string , state string, zipcode int) row format delimited fields terminated by ',';
+
+load data local inpath 'Employees_hive-HBase.txt'  into table employeesInHive
+
+
+Create a Managed table in hive connected to Hbase. HBase table should not exist already.Dropping the hive table will drop HBase table also. LOAD command cannot be used to LOAD data instead use insert OVERWRITE
+
+CREATE TABLE EmployeesToHBase(rowkey String, firstName STRING, lastName STRING,DOB string,salary double,address1 string,address2 string,city string , state string, zipcode int)
+STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+WITH SERDEPROPERTIES ('hbase.columns.mapping' = ':key,Personal:firstName,Personal:lastName,Personal:DOB,Personal:salary,Official:address1,
+Official:address2,Official:city,Official:state,Official:zipcode')
+TBLPROPERTIES ('hbase.table.name' = 'Employee') ;
+
+insert overwrite table EmployeesToHBase select * from employeesInHive
+
+
+Create an EXTERNAL table in hive connected to Hbase. HBase table should  exist already in HBase.Dropping the hive table will NOT drop HBase table. LOAD command cannot be used to LOAD data instead use insert OVERWRITE
+
+
+CREATE EXTERNAL TABLE EmployeesToHBase(rowkey String, firstName STRING, lastName STRING,DOB string,salary double,address1 string,address2 string,city string , state string, zipcode int)
+STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+WITH SERDEPROPERTIES ('hbase.columns.mapping' = ':key,Personal:firstName,Personal:lastName,Personal:DOB,Personal:salary,Official:address1,
+Official:address2,Official:city,Official:state,Official:zipcode')
+TBLPROPERTIES ('hbase.table.name' = 'Employee') ;
+
+
