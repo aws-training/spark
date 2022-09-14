@@ -1,0 +1,23 @@
+
+<configuration>
+   <property>
+      <name>javax.jdo.option.ConnectionURL</name>
+      <value>jdbc:mysql://localhost/metastore?createDatabaseIfNotExist=true</value>
+      <description>metadata is stored in a MySQL server</description>
+   </property>
+   <property>
+      <name>javax.jdo.option.ConnectionDriverName</name>
+      <value>com.mysql.cj.jdbc.Driver</value>
+      <description>MySQL JDBC driver class</description>
+   </property>
+   <property>
+      <name>javax.jdo.option.ConnectionUserName</name>
+      <value>hiveuser</value>
+      <description>user name for connecting to mysql server</description>
+   </property>
+   <property>
+      <name>javax.jdo.option.ConnectionPassword</name>
+      <value>Metastore1.0</value>
+      <description>hivepassword for connecting to mysql server</description>
+   </property>
+</configuration>
